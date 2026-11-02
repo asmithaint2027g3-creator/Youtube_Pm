@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#020617" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bgGlow)"/>
+
+  <!-- Architectural Subtle Grid -->
+  <g opacity="0.08" stroke="#94a3b8" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="720"/>
+    <line x1="240" y1="0" x2="240" y2="720"/>
+    <line x1="400" y1="0" x2="400" y2="720"/>
+    <line x1="560" y1="0" x2="560" y2="720"/>
+    <line x1="720" y1="0" x2="720" y2="720"/>
+    <line x1="880" y1="0" x2="880" y2="720"/>
+    <line x1="1040" y1="0" x2="1040" y2="720"/>
+    <line x1="1200" y1="0" x2="1200" y2="720"/>
+    <line x1="0" y1="120" x2="1280" y2="120"/>
+    <line x1="0" y1="240" x2="1280" y2="240"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="480" x2="1280" y2="480"/>
+    <line x1="0" y1="600" x2="1280" y2="600"/>
+  </g>
+
+  <!-- Top Navigation &amp; Metadata Header -->
+  <g transform="translate(60, 40)">
+    <!-- Series Badge -->
+    <rect x="0" y="0" width="310" height="34" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="16" cy="17" r="5" fill="#38bdf8"/>
+    <text x="30" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#f8fafc" letter-spacing="0.1em">
+      PROFITMACHINES BRIEFING 01
+    </text>
+
+    <!-- Scene Number Pill -->
+    <rect x="325" y="0" width="130" height="34" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="345" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#38bdf8">
+      SCENE 03/16
+    </text>
+
+    <!-- Timecode Pill -->
+    <rect x="470" y="0" width="140" height="34" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="488" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#94a3b8">
+      1:30 – 2:15
+    </text>
+
+    <!-- Visual Category -->
+    <rect x="625" y="0" width="310" height="34" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="640" y="22" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#64748b">
+      TYPE: Animated Comparative Curve Chart
+    </text>
+
+    <!-- ProfitMachines Brand Vector Top Right -->
+    <g transform="translate(1000, 2)">
+      <polygon points="12,0 24,7 24,21 12,28 0,21 0,7" fill="none" stroke="#38bdf8" stroke-width="2"/>
+      <circle cx="12" cy="14" r="3" fill="#38bdf8"/>
+      <text x="32" y="19" font-family="'Inter', sans-serif" font-size="14" font-weight="800" fill="#f8fafc" letter-spacing="0.08em">PROFITMACHINES</text>
+    </g>
+  </g>
+
+  <!-- Scene Title Headline -->
+  <g transform="translate(60, 115)">
+    <text font-family="'Inter', sans-serif" font-weight="800" font-size="28" fill="#f8fafc" letter-spacing="-0.02em">
+      The Headcount Trap: Diminishing Quota Yield
+    </text>
+  </g>
+
+  <!-- Dynamic Center Stage Graphic Area -->
+  <g transform="translate(60, 150)">
+    
+      <rect x="0" y="0" width="1160" height="475" rx="16" fill="#0b1329" stroke="#1e293b" stroke-width="1.5"/>
+      <g transform="translate(60, 40)">
+        <text font-family="'Inter', sans-serif" font-size="15" font-weight="700" fill="#ef4444" letter-spacing="0.1em">THE HEADCOUNT TRAP: MARGINAL COST &gt; MARGINAL SALES YIELD</text>
+        <text y="40" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="#fff">Widening Gap: Loaded Rep Cost vs Quota Attainment</text>
+        <g transform="translate(60, 70)">
+          <line x1="0" y1="230" x2="680" y2="230" stroke="#475569" stroke-width="2"/>
+          <line x1="0" y1="0" x2="0" y2="230" stroke="#475569" stroke-width="2"/>
+          <path d="M 0 150 Q 300 130 650 30 L 650 180 Q 300 160 0 150 Z" fill="#ef4444" opacity="0.15"/>
+          <text x="380" y="145" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#f87171">MARGIN COMPRESSION ZONE</text>
+          <path d="M 0 150 Q 300 130 650 30" fill="none" stroke="#ef4444" stroke-width="4"/><circle cx="650" cy="30" r="6" fill="#ef4444"/><text x="665" y="35" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#ef4444">Cost: $280K/Rep</text>
+          <path d="M 0 150 Q 250 120 650 180" fill="none" stroke="#38bdf8" stroke-width="4"/><circle cx="650" cy="180" r="6" fill="#38bdf8"/><text x="665" y="185" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#38bdf8">Yield: 47% Quota</text>
+        </g>
+        <g transform="translate(850, 70)">
+          <rect width="210" height="90" rx="10" fill="#1e293b" stroke="#334155"/><text x="16" y="30" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#94a3b8">REP COMPENSATION</text><text x="16" y="65" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#f87171">$250k–$300k</text>
+          <rect y="110" width="210" height="90" rx="10" fill="#1e293b" stroke="#334155"/><text x="16" y="140" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#94a3b8">CAC PAYBACK</text><text x="16" y="175" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="#f87171">&gt; 24 Months</text>
+        </g>
+        <g transform="translate(0, 340)">
+          <rect width="1040" height="50" rx="8" fill="#1e293b"/><text x="25" y="32" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#94a3b8">"Headcount is an amplifier. When you amplify an inefficient system, you produce larger losses, not higher growth."</text>
+        </g>
+      </g>
+  </g>
+
+  <!-- Bottom Executive Footer Bar -->
+  <g transform="translate(60, 655)">
+    <line x1="0" y1="0" x2="1160" y2="0" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="0" y="24" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.08em">
+      PROFITMACHINES REVENUE SYSTEMS • EXECUTIVE C-SUITE BRIEFING SERIES • CONFIDENTIAL &amp; PROPRIETARY
+    </text>
+    <text x="1160" y="24" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38bdf8">
+      SCENE 03 OF 16
+    </text>
+  </g>
+</svg>

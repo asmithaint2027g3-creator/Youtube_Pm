@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProfitMachines Executive Video Series — Interactive Production Screening Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020617;
+      --card-bg: #0b1329;
+      --card-border: #1e293b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #60a5fa;
+      --accent-emerald: #10b981;
+      --accent-red: #ef4444;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .container { max-width: 1480px; margin: 0 auto; }
+    
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .brand-logo-wrap { display: flex; align-items: center; gap: 1rem; }
+    .brand-logo-svg { height: 42px; width: auto; }
+    
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .badge-emerald {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+    }
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #f59e0b;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #fff;
+    }
+    .lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 950px;
+    }
+
+    /* Tabs for 3 Briefings */
+    .tab-bar {
+      display: flex;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: #0f172a;
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: #1e293b;
+      color: #fff;
+      border-color: #334155;
+    }
+    .tab-btn.active {
+      background: #1e293b;
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Briefing Main Player Theater */
+    .player-theater {
+      display: grid;
+      grid-template-columns: 880px 1fr;
+      gap: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.85);
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 1300px) {
+      .player-theater {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Screen Stage */
+    .stage-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .screen-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+    }
+    .screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s ease-in-out;
+    }
+    .screen-overlay-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--accent-blue);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      z-index: 10;
+      letter-spacing: 0.05em;
+    }
+    .audio-control-bar {
+      background: #040814;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .audio-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    audio {
+      width: 100%;
+      height: 38px;
+      outline: none;
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+
+    /* Active Scene Tracker Card */
+    .scene-meta-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      justify-content: space-between;
+    }
+    .current-scene-card {
+      background: #070c1a;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .scene-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scene-now-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .scene-now-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* 16-Scene Grid / List */
+    .playlist-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+    .playlist-item {
+      background: #090e1c;
+      border: 1px solid #1e293b;
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .playlist-item:hover {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .playlist-item.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent-blue);
+    }
+    .playlist-item.active .playlist-title {
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+    .playlist-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+      width: 24px;
+      flex-shrink: 0;
+    }
+    .playlist-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      background: #1e293b;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .playlist-title {
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Subtitle Ticker */
+    .subtitle-ticker-box {
+      background: #040814;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .subtitle-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-emerald);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .subtitle-live-text {
+      font-size: 0.95rem;
+      color: #f8fafc;
+      font-weight: 500;
+    }
+
+    /* Resources Footer */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .res-card {
+      background: #070c1a;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .res-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .res-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .res-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-blue);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 6px;
+    }
+    .res-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+
+    /* FFmpeg Render Banner */
+    .render-banner {
+      background: #091226;
+      border: 1px solid #1e3a8a;
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .code-box {
+      background: #020617;
+      border: 1px solid #1e293b;
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="brand-row">
+      <div class="brand-logo-wrap">
+        <img src="assets/profitmachines_logo_vector.svg" alt="ProfitMachines" class="brand-logo-svg">
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <span class="badge-pill badge-emerald">● 16-Scene Synchronized Screening Suite</span>
+        <span class="badge-pill">48 Total Production Scenes</span>
+        <span class="badge-pill">48kHz Voice Masters</span>
+      </div>
+    </div>
+    <h1>Executive Trilogy: Synchronized Audiovisual Screening Portal</h1>
+    <p class="lead">
+      Review all three executive briefings with real-time visual scene synchronization. As the master voice-over narration plays, the screen actively advances through all 16 storyboard scenes with precise timecoded diagrams, models, and formulas.
+    </p>
+  </header>
+
+  <!-- Briefing Selection Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchBriefing(1)" id="tab-1">
+      <span>Briefing 01: Revenue Friction</span>
+      <span class="badge-pill" style="font-size: 0.65rem; padding: 0.15rem 0.5rem;">16 Scenes • 13:45</span>
+    </button>
+    <button class="tab-btn" onclick="switchBriefing(2)" id="tab-2">
+      <span>Briefing 02: AI-Native Transformation</span>
+      <span class="badge-pill" style="font-size: 0.65rem; padding: 0.15rem 0.5rem;">16 Scenes • 14:15</span>
+    </button>
+    <button class="tab-btn" onclick="switchBriefing(3)" id="tab-3">
+      <span>Briefing 03: 90-Day Roadmap</span>
+      <span class="badge-pill" style="font-size: 0.65rem; padding: 0.15rem 0.5rem;">16 Scenes • 14:00</span>
+    </button>
+  </div>
+
+  <!-- Main Player Theater -->
+  <div class="player-theater">
+    
+    <!-- Left: Stage & Controls -->
+    <div class="stage-wrapper">
+      <div class="screen-frame">
+        <div class="screen-overlay-badge" id="screenBadge">SCENE 01/16 • 0:00</div>
+        <img src="video-01-revenue-friction/scenes/scene-01.svg" alt="Current Scene" id="activeScreenImg" class="screen-img">
+        <div id="imageErrorOverlay" style="display:none; position:absolute; inset:0; background:#070c1a; padding:2rem; flex-direction:column; justify-content:center; align-items:center; text-align:center; z-index:30;">
+          <p style="color:#ef4444; font-family:'JetBrains Mono', monospace; font-size:1.1rem; font-weight:700; margin-bottom:0.75rem;">⚠️ SCENE GRAPHIC LOAD ERROR</p>
+          <p id="imageErrorPath" style="color:#94a3b8; font-family:'JetBrains Mono', monospace; font-size:0.85rem; margin-bottom:1.25rem;"></p>
+          <button onclick="retryActiveScene()" style="background:#1e293b; color:#38bdf8; border:1px solid #38bdf8; padding:0.5rem 1rem; border-radius:6px; font-weight:700; cursor:pointer;">Retry Load</button>
+        </div>
+      </div>
+
+      <!-- Synchronized Subtitle Ticker -->
+      <div class="subtitle-ticker-box">
+        <span class="subtitle-label">SYNC VO:</span>
+        <span class="subtitle-live-text" id="liveSubtitle">"If you lead an enterprise commercial organization—as a Chief Executive Officer, Chief Revenue Officer, or Chief Financial Officer..."</span>
+      </div>
+
+      <!-- Master Audio Player -->
+      <div class="audio-control-bar">
+        <div class="audio-meta-row">
+          <span id="playerTrackLabel">MASTER VOICE TRACK: Briefing 01 (WAV 48kHz / 30.8 MB)</span>
+          <span id="timeTracker">0:00 / 13:45</span>
+        </div>
+        <audio id="mainAudio" controls preload="metadata" ontimeupdate="onAudioTick()">
+          <source id="audioSource" src="audio/v01_narration_full.wav" type="audio/wav">
+          Your browser does not support HTML5 audio.
+        </audio>
+      </div>
+    </div>
+
+    <!-- Right: Scene Agenda & Metadata -->
+    <div class="scene-meta-panel">
+      
+      <!-- Current Scene Card -->
+      <div class="current-scene-card">
+        <div class="scene-kicker">
+          <span style="color: var(--accent-emerald);">●</span>
+          <span id="activeSceneKicker">SCENE 01 OF 16 • DURATION: 45 SECONDS</span>
+        </div>
+        <h3 class="scene-now-title" id="activeSceneTitle">Cold Open Hook: The Pipeline Paradox</h3>
+        <p class="scene-now-desc" id="activeSceneDesc">
+          Opens with high-contrast typography: 67% of forecasted deals slip, reps spend &lt; 33% selling, and exposes the headcount expansion trap.
+        </p>
+      </div>
+
+      <!-- 16-Scene Playlist -->
+      <div>
+        <div style="font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-blue); text-transform: uppercase; font-weight: 700; margin-bottom: 0.5rem;">
+          Storyboard Scene Navigation (Click to Seek)
+        </div>
+        <div class="playlist-wrapper" id="playlistContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Resource Blueprints & Audit Dossiers -->
+  <div class="resources-grid">
+    <div class="res-card">
+      <div class="res-title">Briefing 01: Revenue Friction</div>
+      <div class="res-links">
+        <a href="video-01-revenue-friction/storyboard.md" target="_blank" class="res-link">🎨 Storyboard</a>
+        <a href="video-01-revenue-friction/full-script.md" target="_blank" class="res-link">📄 Full Script</a>
+        <a href="video-01-revenue-friction/synchronized-audio-visual-script.md" target="_blank" class="res-link">⏱️ AV Sync</a>
+        <a href="video-01-revenue-friction/subtitles.srt" target="_blank" class="res-link">💬 Subtitles</a>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-title">Briefing 02: AI-Native Transformation</div>
+      <div class="res-links">
+        <a href="video-02-ai-native-revenue-transformation/storyboard.md" target="_blank" class="res-link">🎨 Storyboard</a>
+        <a href="video-02-ai-native-revenue-transformation/full-script.md" target="_blank" class="res-link">📄 Full Script</a>
+        <a href="video-02-ai-native-revenue-transformation/synchronized-audio-visual-script.md" target="_blank" class="res-link">⏱️ AV Sync</a>
+        <a href="video-02-ai-native-revenue-transformation/subtitles.srt" target="_blank" class="res-link">💬 Subtitles</a>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-title">Briefing 03: 90-Day Roadmap</div>
+      <div class="res-links">
+        <a href="video-03-revenue-growth-roadmap/storyboard.md" target="_blank" class="res-link">🎨 Storyboard</a>
+        <a href="video-03-revenue-growth-roadmap/full-script.md" target="_blank" class="res-link">📄 Full Script</a>
+        <a href="video-03-revenue-growth-roadmap/synchronized-audio-visual-script.md" target="_blank" class="res-link">⏱️ AV Sync</a>
+        <a href="video-03-revenue-growth-roadmap/subtitles.srt" target="_blank" class="res-link">💬 Subtitles</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standalone MP4 Production Pipeline Status -->
+  <div class="render-banner">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span class="badge-pill badge-amber">Production Multiplexer</span>
+        <h3 style="color: #93c5fd; font-size: 1.15rem;">Render Standalone 1080p MP4 Video Files</h3>
+      </div>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #94a3b8;">
+        All 48 Scene SVGs + Master Audio Ready
+      </span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      The 16-scene concat demuxers (<code>concat-v01.txt</code>, <code>concat-v02.txt</code>, <code>concat-v03.txt</code>) have been assembled in <code>final-videos/</code>. To compile all 3 briefings into final MP4 video files on Windows:
+    </p>
+    <div class="code-box">
+      cd final-videos &amp;&amp; .\render_all_videos.bat
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Briefing Data Definitions with Exact Timestamps from Storyboard
+  const briefings = {
+    1: {
+      id: 1,
+      folder: 'video-01-revenue-friction',
+      audio: 'audio/v01_narration_full.wav',
+      label: 'Briefing 01: Revenue Friction (WAV 48kHz / 30.8 MB)',
+      scenes: [
+        { num: 1, title: 'Cold Open Hook: The Pipeline Paradox', start: 0, end: 45, desc: '67% of forecasted deals slip, reps spend < 33% selling, and exposes the headcount expansion trap.' },
+        { num: 2, title: 'The Zero-Interest Era & Headcount Playbook', start: 45, end: 90, desc: 'Historical 2012-2021 ZIRP scaling loop and the 2022 Macro Regime Shift to Rule of 40.' },
+        { num: 3, title: 'The Headcount Trap: Diminishing Quota Yield', start: 90, end: 135, desc: 'Dual curve chart showing rising loaded rep cost ($280k) vs declining quota attainment yield (47%).' },
+        { num: 4, title: 'The Expanded Enterprise Buying Committee', start: 135, end: 180, desc: '6 to 10 stakeholder topology map: Champion vs CFO, CISO, Architecture, and Procurement.' },
+        { num: 5, title: 'The Dark Funnel & The Cost of Latency', start: 180, end: 270, desc: 'Iceberg visualization: 83% of buyer journey is anonymous; 5 mins vs 24 hrs latency decay.' },
+        { num: 6, title: 'GTM Breakdown 1: Signal Sensing Latency', start: 270, end: 310, desc: 'First-party intent blindspot: prospects explore docs and repos weeks before forms are filled.' },
+        { num: 7, title: 'GTM Breakdown 2: Buying Committee Disconnect', start: 310, end: 350, desc: 'Single-threading trap: AE negotiates with 1 champion while silent committee members vote no.' },
+        { num: 8, title: 'GTM Breakdown 3: RevOps Data Fracture', start: 350, end: 390, desc: '4 disconnected silos: Marketing, Sales, Billing, and Support operating without data sync.' },
+        { num: 9, title: 'GTM Breakdown 4: Administrative Rep Drag', start: 390, end: 430, desc: 'Donut chart: 68% administrative drag vs 32% active commercial selling capacity.' },
+        { num: 10, title: 'GTM Breakdown 5: Post-Sale Revenue Amnesia', start: 430, end: 465, desc: 'The context chasm: Sales promises lost during customer handoff to Customer Success.' },
+        { num: 11, title: 'The Cost of Inaction: Macro Framework', start: 465, end: 510, desc: '$100M ARR enterprise autopsy: $17,180,000 annual silent profit bleed across 4 quadrants.' },
+        { num: 12, title: 'Quadrants 1 & 2: Direct Decay & Talent Waste', start: 510, end: 570, desc: 'Direct revenue erosion: $7.84M in deal slippage + $4.12M in rep churn and ramp drag.' },
+        { num: 13, title: 'Quadrants 3 & 4: Tech Overhead & Opportunity Cost', start: 570, end: 630, desc: 'Structural overhead: $1.82M in tool sprawl + $3.40M in market opportunity cost.' },
+        { num: 14, title: 'Point-Tool Proliferation & Human Middleware', start: 630, end: 705, desc: 'Tangled 14-tool sprawl forcing reps to act as human middleware copying data across tabs.' },
+        { num: 15, title: 'The Connected System of Intelligence', start: 705, end: 765, desc: '3-Tier architectural shift: Real-time intent fabric and autonomous multi-agent orchestration.' },
+        { num: 16, title: 'Executive Summary & Video 2 Call to Action', start: 765, end: 825, desc: 'Summary pillars, Cost of Inaction Diagnostic Playbook download, and Video 2 preview.' }
+      ]
+    },
+    2: {
+      id: 2,
+      folder: 'video-02-ai-native-revenue-transformation',
+      audio: 'audio/v02_narration_full.wav',
+      label: 'Briefing 02: AI-Native Transformation (WAV 48kHz / 32.8 MB)',
+      scenes: [
+        { num: 1, title: 'Cold Open Hook: The AI Disillusionment', start: 0, end: 45, desc: 'Why 85% of GenAI sales pilots fail: Point AI wrappers vs Autonomous Revenue Architecture.' },
+        { num: 2, title: 'The Limits of Point AI & Commodity Text', start: 45, end: 90, desc: 'Outbound spam surge (+400%), deliverability crash (8.2%), and enterprise firewall bans.' },
+        { num: 3, title: 'Point AI vs. System of Intelligence', start: 90, end: 135, desc: 'Isolated prompt wrappers vs bi-directional enterprise systems of intelligence.' },
+        { num: 4, title: 'Tier 3: Enterprise Systems of Record', start: 135, end: 195, desc: 'Foundational systems (Salesforce, Snowflake, ERP) preserved without rip-and-replace.' },
+        { num: 5, title: 'Tier 2: Unified Revenue Data & Decision Fabric', start: 195, end: 270, desc: 'Real-time dark demand resolution, entity resolution, and dynamic buying committee graph.' },
+        { num: 6, title: 'Tier 1: AI-Native Orchestration & Agents', start: 270, end: 330, desc: 'Autonomous multi-agent orchestration operating within deterministic mathematical gates.' },
+        { num: 7, title: 'Capability 1: Profit Pool Discovery', start: 330, end: 405, desc: 'Micro-niche ICP TAM sizing and gross-margin-weighted account prioritization.' },
+        { num: 8, title: 'Capability 2: Demand Engineering & Topology', start: 405, end: 480, desc: 'Automated 8-node committee mapping and persona-tailored narrative generation.' },
+        { num: 9, title: 'Capability 3: Sub-60s Context Dossiers', start: 480, end: 555, desc: 'Pre-call executive intelligence delivered 60 minutes before every demo.' },
+        { num: 10, title: 'The Mark Roberge Sales Velocity Formula', start: 555, end: 600, desc: 'V = (Qualified Ops × Win Rate % × ACV) ÷ Sales Cycle (Days) compounding engine.' },
+        { num: 11, title: 'Capability 4: Zero-Touch RevOps Sync', start: 600, end: 645, desc: 'Autonomous email/call activity parsing into CRM fields; zero manual rep data entry.' },
+        { num: 12, title: 'Capability 5: The Value Handshake & 120-Day Alerts', start: 645, end: 690, desc: 'Contract milestone tracking passing to CS; automated 120-day renewal & expansion triggers.' },
+        { num: 13, title: 'Capability 6: Growth Intelligence & Forecasting', start: 690, end: 735, desc: 'Empirical stage velocity vs subjective rep gut feel; forecast variance under 4%.' },
+        { num: 14, title: 'Capability 8: Zero-Data-Retention & Sovereign Trust', start: 735, end: 765, desc: 'Ephemeral inference in RAM, zero model training on customer IP, SOC 2 & HIPAA.' },
+        { num: 15, title: 'Capability 7: GTM Transformation Alignment', start: 765, end: 795, desc: 'Operating model alignment: culture, compensation, and enablement incentives.' },
+        { num: 16, title: 'The 8-Capability Flywheel & Part 3 Bridge', start: 795, end: 855, desc: 'Closed-loop 8-capability revenue flywheel, architecture review CTA, and Part 3 preview.' }
+      ]
+    },
+    3: {
+      id: 3,
+      folder: 'video-03-revenue-growth-roadmap',
+      audio: 'audio/v03_narration_full.wav',
+      label: 'Briefing 03: 90-Day Roadmap (WAV 48kHz / 32.9 MB)',
+      scenes: [
+        { num: 1, title: 'Cold Open Hook: The Fear of Transformation', start: 0, end: 45, desc: 'Why 70% of multi-year IT overhauls fail vs agile 90-day phase-gated execution.' },
+        { num: 2, title: 'The Rip-and-Replace Fallacy', start: 45, end: 90, desc: 'Never rip-and-replace your CRM; intelligent overlay philosophy.' },
+        { num: 3, title: 'Dual-Track Execution: Parallel Velocity', start: 90, end: 135, desc: 'Track A (Immediate Revenue Capture) & Track B (Structural Architecture) run concurrently.' },
+        { num: 4, title: 'The 6 Commercial Dimensions', start: 135, end: 210, desc: 'Strategy, Data Fabric, Multi-Agent Tech, Rep Enablement, RevOps, and Governance.' },
+        { num: 5, title: 'The 4 Evolutionary Stages of Maturity', start: 210, end: 270, desc: 'Stage 1 (Manual) to Stage 4 (Autonomous Revenue Engine) maturity benchmark.' },
+        { num: 6, title: 'The Stage 2 Trap: Why 82% of Firms Stall', start: 270, end: 330, desc: 'The disconnected tool trap: high SaaS costs with zero compounding return.' },
+        { num: 7, title: 'Baseline Audit: KPIs 1 & 2 (Cycle & Selling Time)', start: 330, end: 405, desc: 'Sales cycle compression (124d -> 82d) and active selling time lift (32% -> 58%).' },
+        { num: 8, title: 'Baseline Audit: KPIs 3, 4 & 5 (Conversion, Variance, NRR)', start: 405, end: 480, desc: 'Win rate lift (+52%), forecast variance (<4%), and NRR expansion (102% -> 121%).' },
+        { num: 9, title: '90-Day Blueprint: Phase 1 (Diagnostics & Quick-Wins)', start: 480, end: 555, desc: 'Days 1–30: Dark funnel telemetry, dormant account reactivation, and quick-win cash flow.' },
+        { num: 10, title: '90-Day Blueprint: Phase 2 (Velocity Activation)', start: 555, end: 615, desc: 'Days 31–60: Autonomous SDR deployment and automated pre-call dossier delivery.' },
+        { num: 11, title: '90-Day Blueprint: Phase 3 (Closed-Loop Sync)', start: 615, end: 660, desc: 'Days 61–90: Zero-touch RevOps CRM sync and live board forecast telemetry.' },
+        { num: 12, title: 'The CFO Business Case: Macro Framework & Disclaimer', start: 660, end: 705, desc: '3-Year DCF model on $100M ARR enterprise: $420k TCO vs $12.4M net benefit.' },
+        { num: 13, title: 'DCF Returns: TCO, NPV, IRR & Payback Velocity', start: 705, end: 750, desc: '148% Projected IRR and 4.2-month full capital payback velocity.' },
+        { num: 14, title: 'The Enterprise Valuation Multiple Lift', start: 750, end: 780, desc: 'Rule of 40 score 28% -> 51% driving +$370M enterprise market cap expansion.' },
+        { num: 15, title: 'Board-Level Executive Governance Mandate', start: 780, end: 810, desc: 'Auditable, deterministic board revenue governance replacing subjective sales intuition.' },
+        { num: 16, title: 'Series Conclusion & Final Call to Action', start: 810, end: 840, desc: 'Trilogy summary, 90-Day Roadmap download, and executive diagnostic consultation.' }
+      ]
+    }
+  };
+
+  let currentBriefingId = 1;
+  let activeSceneNum = 1;
+
+  function switchBriefing(id) {
+    currentBriefingId = id;
+    activeSceneNum = 1;
+
+    // Update active tab styling
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+
+    const b = briefings[id];
+    const audio = document.getElementById('mainAudio');
+    document.getElementById('audioSource').src = b.audio;
+    document.getElementById('playerTrackLabel').innerText = b.label;
+    audio.load();
+
+    renderPlaylist();
+    updateSceneVisual(1);
+  }
+
+  function renderPlaylist() {
+    const b = briefings[currentBriefingId];
+    const container = document.getElementById('playlistContainer');
+    container.innerHTML = '';
+
+    b.scenes.forEach(s => {
+      const pad = String(s.num).padStart(2, '0');
+      const timeStr = formatTime(s.start);
+
+      const div = document.createElement('div');
+      div.className = 'playlist-item' + (s.num === activeSceneNum ? ' active' : '');
+      div.id = 'scene-item-' + s.num;
+      div.onclick = () => seekToScene(s.num);
+
+      div.innerHTML = `
+        <span class="playlist-num">${pad}</span>
+        <span class="playlist-time">${timeStr}</span>
+        <span class="playlist-title">${s.title}</span>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function seekToScene(num) {
+    const b = briefings[currentBriefingId];
+    const s = b.scenes.find(x => x.num === num);
+    if (!s) return;
+
+    const audio = document.getElementById('mainAudio');
+    audio.currentTime = s.start;
+    audio.play().catch(e => console.log('Playback error:', e));
+    updateSceneVisual(num);
+  }
+
+  function updateSceneVisual(num) {
+    activeSceneNum = num;
+
+    const b = briefings[currentBriefingId];
+    const s = b.scenes.find(x => x.num === num);
+    if (!s) return;
+
+    const pad = String(num).padStart(2, '0');
+    const imgPath = `${b.folder}/scenes/scene-${pad}.svg`;
+    
+    const img = document.getElementById('activeScreenImg');
+    const errOverlay = document.getElementById('imageErrorOverlay');
+    if (errOverlay) errOverlay.style.display = 'none';
+
+    img.onerror = function() {
+      console.error('Failed to load scene SVG:', imgPath);
+      if (errOverlay) {
+        document.getElementById('imageErrorPath').innerText = 'Failed path: ' + imgPath;
+        errOverlay.style.display = 'flex';
+      }
+    };
+    img.onload = function() {
+      img.style.opacity = '1';
+    };
+
+    img.style.opacity = '0.3';
+    img.src = imgPath;
+    img.dataset.loadedNum = String(num);
+
+    document.getElementById('screenBadge').innerText = `SCENE ${pad}/16 • ${formatTime(s.start)}`;
+    document.getElementById('activeSceneKicker').innerText = `SCENE ${pad} OF 16 • DURATION: ${s.end - s.start} SECONDS`;
+    document.getElementById('activeSceneTitle').innerText = s.title;
+    document.getElementById('activeSceneDesc').innerText = s.desc;
+    document.getElementById('liveSubtitle').innerText = `"${s.desc}"`;
+
+    // Update active playlist item
+    document.querySelectorAll('.playlist-item').forEach(el => el.classList.remove('active'));
+    const activeItem = document.getElementById('scene-item-' + num);
+    if (activeItem) {
+      activeItem.classList.add('active');
+      activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  function retryActiveScene() {
+    updateSceneVisual(activeSceneNum);
+  }
+
+  function onAudioTick() {
+    const audio = document.getElementById('mainAudio');
+    const curTime = audio.currentTime;
+    const dur = audio.duration || 1;
+
+    document.getElementById('timeTracker').innerText = `${formatTime(curTime)} / ${formatTime(dur)}`;
+
+    // Find current scene
+    const b = briefings[currentBriefingId];
+    const s = b.scenes.find(x => curTime >= x.start && curTime < x.end);
+    if (s && s.num !== activeSceneNum) {
+      updateSceneVisual(s.num);
+    }
+  }
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', () => {
+    switchBriefing(1);
+  });
+</script>
+
+</body>
+</html>

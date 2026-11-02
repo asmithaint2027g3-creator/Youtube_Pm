@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="indigoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Icon Mark: Mathematical Commercial Compounding Vector -->
+  <g transform="translate(40, 25)">
+    <!-- Base Layer -->
+    <rect x="10" y="10" width="130" height="130" rx="32" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+    
+    <!-- Outer Compounding Circuit -->
+    <path d="M 45 110 L 45 40 L 85 40 A 25 25 0 0 1 85 90 L 45 90" fill="none" stroke="url(#blueGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Forward Accelerating Vector Arrow -->
+    <path d="M 75 75 L 115 115 M 115 115 L 90 115 M 115 115 L 115 90" fill="none" stroke="#38bdf8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- High-Precision Telemetry Node -->
+    <circle cx="85" cy="65" r="7" fill="#10b981"/>
+  </g>
+  
+  <!-- Typography -->
+  <g transform="translate(205, 95)">
+    <!-- Brand Wordmark -->
+    <text font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="52" fill="#f8fafc" letter-spacing="-0.03em">
+      PROFIT<tspan fill="#38bdf8">MACHINES</tspan>
+    </text>
+    
+    <!-- Subtitle / Tagline -->
+    <text y="42" font-family="'JetBrains Mono', 'Fira Code', monospace" font-weight="700" font-size="16" fill="#94a3b8" letter-spacing="0.28em">
+      AI-NATIVE REVENUE TRANSFORMATION PLATFORM
+    </text>
+  </g>
+</svg>
+
